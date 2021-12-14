@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    box-sizing: border-box;
+}
+
+body div.landing-page{
+    background-color: #eee;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    grid-gap: 2em;
+    min-height: 100vh;
+}
+
+div.nav{
+    grid-column: 1/-1;
+}
+
+div.landing-page div:nth-child(2),div:nth-child(3),div:nth-child(4){
+   margin-top: 3em;
+}
+
+div.nav ul{
+    list-style-type: none;
+	transition: all 1s ease-out;
+	position: fixed;
+    background-color: #eee;
+    color: #444;
+    height: 60px;
+    width: 100%;
+    z-index: 1;
+}
+
+div.nav ul li{
+    float: left;
+    margin:1.2em 0 0 5em;
+    font-size: 16px;
+}
+
+ul a{
+    text-decoration: none;
+    color: #0080A9;
+}
+
+ul a:hover{
+    color:#67caeb;
+}
+
+div.nav ul li:nth-child(2){
+    margin-left: 22em;
+}
+
+div.nav ul li:last-child{
+    margin-left: 14em;
+}
+ul li:first-child{
+    font-size: 20px;
+    margin-left: 0;
+    font-family: poppins;
+}
+
+div.landing-page div:nth-child(2){
+    margin-top: -3em;
+}
+div.landing-page div.roles{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+}
+div.landing-page div:last-child{
+    height: 300px;
+    width: 400px;
+    background-color: #444;
+    border-radius: 8px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: relative;
+}
+
+.btn{
+    background-color: #eee;
+    color: #0080A9;
+    font-weight: bolder;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 2s;
+    border:1px solid #0080A9;
+    border-bottom:8px solid #0080A9;
+   	box-shadow: 0 14px 28px 0 rgba(247, 80, 21, 0.12), 0 10px 15px 0 rgba(247, 80, 21, 0.11);
+}
+
+
+.btn:hover{
+	background-color: #0080A9;
+	color: #fff;
+	border-radius: 5px;
+    box-shadow: 0 14px 28px 0 rgba(247, 80, 21, 0), 0 10px 15px 0 rgba(247, 80, 21, 0);
+}
+.dwd-cv{
+    margin-left: 6em;
+}
+
+
+.control{
+      position: absolute;
+      border-radius: 50%;
+      height: 12px;
+      width:12px;
+  }
+  
+  .green{
+      background-color: #6F0B80;
+      top:-14%;
+      left:14%;
+      z-index: 3;
+  }
+  
+  .red{
+      background-color: #BC3011;
+      margin: 6px 0px 0px 10px;
+  }
+  .yellow{
+      background-color: #FFB649;
+      top:18%;
+      left:8%;
+  }
+  
