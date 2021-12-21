@@ -1,6 +1,10 @@
 p{
     margin-bottom: .5em;
 }
+a{
+    text-decoration: none;
+    color: #72d4f3;
+}
 div.wrapper{
     min-height: 80%;
     display: grid;
@@ -50,8 +54,7 @@ div.article{
     grid-template-columns: repeat(12,1fr);
     justify-items:stretch ;
 }
-
-div.article div.header{
+ div.header{
     grid-column: 1/-1;
     border-bottom: 1px solid rgba(0,0,0,.125);
     padding: .2em;
@@ -111,6 +114,46 @@ div.article-body{
     text-align: center;
  }
 
+ .article-form-container{
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+    min-height: auto;
+    padding: 2em;
+}
+
+.article-form-container form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.article-form-container .form-item{
+    border: 1px solid #333;
+}
+
+.article-form-container .form-item input{
+    border-bottom: 1px;
+}
+  
+  .article-form-container .form-item input,textarea {
+    border: 0;
+    display: block;
+    padding: 5px 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .article-form-container .form-item label {
+    position: block;
+    top: -34px;
+    left: 0;
+    pointer-events: none;
+  }
+
+ .article-form-container .btn{
+     border-bottom: 1px solid;
+ }
+  
  @media only screen and (max-width: 760px) {
     div.sidebar{
         left: -100%;
