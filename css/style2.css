@@ -616,6 +616,7 @@ div:hover{
       transition: all 0.1s;
       border-bottom:1px dashed #444;
     }
+    
     .hamburger {
     display: block;
     cursor: pointer;
