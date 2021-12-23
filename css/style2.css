@@ -141,7 +141,7 @@ ul.nav_white li:hover span.list:after {
   font-size: 15px;
   margin: 4px 2px;
   cursor: pointer;
-  transition: all 2s;
+  transition: all 1s;
   border:1px solid #0080A9;
   border-bottom:8px solid #0080A9;
   box-shadow: 0 14px 28px 0 rgba(247, 80, 21, 0.12), 0 10px 15px 0 rgba(247, 80, 21, 0.11);
@@ -616,6 +616,7 @@ div:hover{
       transition: all 0.1s;
       border-bottom:1px dashed #444;
     }
+    
     .hamburger {
     display: block;
     cursor: pointer;
