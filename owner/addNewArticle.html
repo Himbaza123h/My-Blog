@@ -62,15 +62,18 @@
           Add New Article
         </div>  
         <div class="container article-form-container">
-          <form action="owner/index.html">
+          <div class="error add-article-error">
+            sdfdsf
+          </div>
+          <form action="owner/index.html" id="add-article-form">
             <div class="form-item">
               <label>Article Heading</label>
-              <input type="text" required>
+              <input type="text" id="article-heading">
             </div>
     
             <div class="form-item">
               <label>Article Content</label>
-              <textarea name="article-content" cols="30" rows="10"></textarea>
+              <textarea name="article-content" cols="30" rows="10" id="article-content"></textarea>
             </div>
 
             <div class="form-item">
@@ -88,4 +91,5 @@
 </body>
 
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/validation.js"></script>
 </html>
