@@ -6,6 +6,16 @@ let bars = $.querySelector(('#bars'));
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-ul");
 
+const label = document.querySelectorAll('.form-control label')
+
+label.forEach(label => {
+    label.innerHTML = label.innerText
+        .split('')
+        .map((letter, idx) => `<span style="transition-delay:${idx * 30}ms">${letter}</span>`)
+        .join('')
+})
+
+
 hamburger.addEventListener("click", mobileMenu);
 
 function mobileMenu() {
@@ -123,4 +133,9 @@ labels.forEach(label => {
         .split('')
         .map((letter, idx) => `<span style="transition-delay:${idx * 30}ms">${letter}</span>`)
         .join('')
+})
+
+
+document.addEventListener("resize",function(){
+   console.log(scrollX)
 })
