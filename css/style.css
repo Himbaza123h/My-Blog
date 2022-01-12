@@ -101,7 +101,6 @@ div.content{
     letter-spacing: .3px;
     line-height: 28px;
 }
-
 div.article-wrapper{
     grid-column: 3/11;
 }
@@ -265,6 +264,7 @@ div.blog-article-container {
  .article-form-container .btn{
      border-bottom: 1px solid;
  }
+
   
  @media only screen and (max-width: 760px) {
     div.sidebar{
