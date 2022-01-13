@@ -13,6 +13,9 @@ a{
 .btn-n-border{
     border-bottom: 1px solid;
 }
+button.btn-skyblue{
+    background-color: #fff;
+}
 .btn-red{
     background-color: #fff;
     border: 1px solid #dc3545;
@@ -22,6 +25,14 @@ a{
 .btn-red:hover{
     background-color: #e77783;
     border-radius: 3px;
+}
+
+.btn-comment{
+    box-shadow: none;
+    padding: 0.6em 1em;
+    width: 25%;
+    margin-top: 4px;
+    background-color: #fff;
 }
 table {
     font-family: Arial, Helvetica, sans-serif;
@@ -91,6 +102,9 @@ div.content{
     line-height: 28px;
 }
 
+div.article-wrapper{
+    grid-column: 3/11;
+}
 div.article{
     display: grid;
     grid-template-columns: repeat(12,1fr);
@@ -108,9 +122,52 @@ div.article{
   div.article-info{
     grid-column: 1/-1;
     padding: .4em;
-    height: 60px;
+    min-height: 60px;
   }
 
+   div.article-info #comment{
+       color:#444;
+       font-weight: 900;
+       margin-left: 2em;
+   }
+
+   div.article-info #like{
+    color:#444;
+    font-weight: 900;
+
+}
+
+  div.article-comments{
+      min-height: 300px;
+      border-left: 3px solid #888;
+  }
+
+  div.article-comment{
+      border-bottom: 2px solid #888;
+      margin-bottom: 1em;
+      margin-left: 1.2em;
+
+  }
+
+  div.comment-form{
+      border-bottom: 0;
+  }
+ 
+  div.article-comment .form-item{
+      width: inherit;
+  }
+  div.article-comment input{
+      width: 100%;
+      border:2px solid #888;
+      padding: 8px 0;
+  }
+  div.article input:valid {
+    border: 2px solid #888;
+}
+ 
+  div.article input:focus {
+    border: 2px solid #0080a9;
+}
  .article-actions{
     margin-top: -1em;
     float: right;
@@ -124,12 +181,14 @@ div.article{
 
 .img-big{
     width: 80%;
-    height: 20%;
     height: auto;
     grid-column: 1/8;
     border-radius: 10px;
 }
-
+.img-article{
+    width: 40%;
+    height: 60%;
+}
 .img-bordered{
     border: 2px solid #adb5bd;
 }
@@ -141,6 +200,10 @@ div.article-info .username{
     font-weight: 600;
 }
 
+div.article-info .username-comment{
+      font-size:15px ;
+}
+
 div.article-info .article-time{
     font-size: 12px;
     color: #6c757d;
@@ -149,6 +212,9 @@ div.article-info .article-time{
 
 div.article-body{
      grid-column: 1/-1;
+}
+div.blog-article-container {
+    display: grid;
 }
 
  div.footer-blog{
@@ -210,6 +276,6 @@ div.article-body{
         margin-top: 1em;
     }
     div.footer-blog{
-        grid-column: 2/-1;
+        grid-column: 1/-1;
     }
  }
