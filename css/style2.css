@@ -254,50 +254,6 @@ div#why{
   width: 90vw;
 }
 
-div#blog{
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  grid-template-rows: 90px 200px ;
-  background-color: #eee;
-  margin-left: 20px;
-  min-height: 30vh;
-  grid-gap: 5px;
-}
-
-div#blog .social{
-  margin-top: 3em;
-  min-height: 120px;
-  padding: 1em;
-}
-/* The social box in the list of blog articles */
-div.blog div.social{
-  box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
-}
-
-div.blog div.social:hover{
-  box-shadow: 0 14px 28px 0 rgb(49 158 221 / 25%), 0 10px 15px 0 rgb(247 80 21 / 22%);
-}
-
-div#blog   .where-text{
-  font-weight: bolder;
-  font-size: 20px;
-  grid-column: 1/-1;
-  min-height: 50px;
-  margin-top: 2em;
-}
-div#blog a{
-  text-decoration: none;
-  color: black;
-}
-div#blog div.where-text a{
-  color:#0080A9;
-}
-
-div#blog h5{
-   color:#6c757d ;
-}
-
-
 div#why .social{
   padding: 5px 10px;
   background-color: #eee;
@@ -620,7 +576,6 @@ div.footer{
   background-color: #444;
   color:#fff;
   padding: 1em;
-  margin-top: 1em;
 }
 
 div:hover{
@@ -630,8 +585,6 @@ div:hover{
   display: none;
   float: right;
 }
-
-
 /* Change some css properties  when screen less than 768px */
 @media only screen and (max-width: 760px) {
   /* Make the nav responsive */
@@ -703,24 +656,13 @@ div:hover{
 
     div#where{
     	margin-left: 1em;
-    	width:76vw;
+    	width: auto;
     	padding: 3em;
     }
-
-    div#where .social{
-       min-height: initial;
-    }
-
-    div#where .where-text{
-      margin-bottom: 2em;
-    }
-
     div#how{
       margin: 2em 1em 4em 1em;
       padding: 0;
-      background-color: inherit;
         }
-
     div#how .last{
       display: flex;
       flex-direction: column;
