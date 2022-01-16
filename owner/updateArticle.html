@@ -16,7 +16,7 @@
 
  <!-- <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">  -->
 </head>
-<body>
+<body id="updateArticleFile">
   <!-- The top navigation bar -->
   <nav class="nav ">
     <ul class="nav-blog-owner">
@@ -62,22 +62,26 @@
           Add New Article
         </div>  
         <div class="container article-form-container">
-          <form action="owner/index.html">
+          <form action="owner/index.html" id="update-article-form">
             <div class="form-item">
               <label>Article Heading</label>
-              <input type="text" value="Hey,there i am a header." required>
+              <input type="text" id="article-heading" required>
             </div>
     
             <div class="form-item">
               <label>Article Content</label>
-              <textarea name="article-content" cols="30" rows="10" >
+              <textarea name="article-content" id="article-content" cols="30" rows="10" >
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi possimus voluptate doloribus tenetur repudiandae, repellendus laboriosam officiis quaerat rem quo dolorum obcaecati! Ipsa, itaque. Ex incidunt nemo nisi voluptate alias delectus aspernatur qui velit, sequi perspiciatis facilis asperiores? Maiores vel ab assumenda asperiores in, inventore exercitationem cum accusamus consequatur ea.
               </textarea>
             </div>
 
             <div class="form-item">
               <label>Article Photo</label>
-              <input type="file"  required>
+              <input type="file" id="article-image"  required>
+            </div>
+            <div>
+              <label for="preview">Current Image</label> <br>
+                 <img src="" alt="Image Preview" id="preview" class="img img-bordered img-preview">   
             </div>
             <button class="btn">Publish Article</button>
           </form>
@@ -88,6 +92,9 @@
       </div>
   </div>
 </body>
+<script>
 
+</script>
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="module" src="../js/main.js"></script>
 </html>

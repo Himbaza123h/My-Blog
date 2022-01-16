@@ -1,71 +1,85 @@
-// document.querySelector('#contact-form').addEventListener('submit',function(e){
-//     e.preventDefault();
-//     validateInput(e.target);
-// })
+import { addArticle } from './addArticle.js';
 
-// document.querySelector('#login-form').addEventListener('submit',function(e){
-//     e.preventDefault();
-//     validateInput(e.target);
-// })
+let img ;
+  document.querySelector("#article-image").addEventListener("change",function(){
+    const reader = new FileReader();
 
-document.querySelector('#add-article-form').addEventListener('submit',function(e){
+    reader.addEventListener("load",() =>{
+         img = reader.result;
+    });
+
+    reader.readAsDataURL(this.files[0]);
+  })
+
+document.querySelector('form').addEventListener('submit',function(e){
     e.preventDefault();
     validateInput(e.target);
 })
 
+function filterForm(form){
+    form = [...form.children];
+    let inputEl = [];
+        form.forEach(el=>{
+            [...el.children].filter(ele=>{
+                if (ele.nodeName == 'INPUT' || ele.nodeName == 'TEXTAREA') {  
+                    inputEl.push(ele);
+                }
+            })
+        }) 
+   
+    return inputEl;
+}
+
+function isEmpty(formElements){
+    let c = 0;
+    formElements.forEach(el=>{
+       let elementValue = el.value.replace(/ /g,'');
+        elementValue.length < 2?c++:c;
+    })
+    return c>0?true:false;
+}
+
+function displayError(message){
+    document.querySelector('div.error').innerHTML = message;
+    document.querySelector('div.error').style.display = 'block';
+}
 
 function validateInput(form){
-    if (form.id == 'contact-form') {
-        let message = document.querySelector('#message'),
-        email = document.querySelector('#email'),
-        name = document.querySelector('#name'),
-        subject = document.querySelector('#subject');
-        messageValue = message.value.replace(/ /g,'');
-        
-        if( email.value != ""  && name.value != ""  && subject.value != "" && message.value > 1 ){
-             
-        }else{
-            document.querySelector('div.error').innerHTML = 'Please fill all fields before submitting.';
-            document.querySelector('div.error').style.display = 'block';
-        }
-
-    }else if(form.id == 'login-form'){
-        let username = document.querySelector('#username'),
-        password = document.querySelector('#password');
-        
-        if( username.value != ""  && password.value != "" ){
-               window.location = "owner/index.html"
-        }else{
-            document.querySelector('div.error').innerHTML = 'Please fill all fields before submitting.';
-            document.querySelector('div.error').style.display = 'block';
-        }   
-      }
+      let formEle = filterForm(form);
+    
+        if (form.id == 'contact-form') {
+          
+            if(!isEmpty(formEle)){
+                
+            }else{
+                displayError('Please fill all fields before submitting.');
+            }
+     }else if(form.id == 'login-form'){
+            if( !isEmpty(formEle)){
+                window.location = "owner/index.html"
+            }else{
+                displayError('Please fill all fields before submitting.');
+            }   
+         }
 
     else if(form.id == 'add-article-form'){
         let articleHeading = document.querySelector('#article-heading'),
         articleContent = document.querySelector('#article-content');
         
-        if( articleHeading.value != ""  && articleContent.value != "" ){
+        if(!isEmpty(formEle)){
                if (articleHeading.value.length < 21) {
-                document.querySelector('div.error').innerHTML = 'The article heading should not be less than 20 letters.';
-                document.querySelector('div.error').style.display = 'block';                   
+                 displayError('The article heading should not be less than 20 letters.');
                }
                if (articleContent.value.length < 50) {
-                document.querySelector('div.error').innerHTML = 'The article contents should not be less than 50 letters.';
-                document.querySelector('div.error').style.display = 'block';      
+                 displayError('The article contents should not be less than 50 letters.');     
                }
                if(articleContent.value.length > 50 && articleHeading.value.length > 21){
-                   addArticle(articleHeading.value,articleContent.value);
+                   document.querySelector('div.error').style.display = 'none'; 
+                   addArticle(articleHeading.value,articleContent.value,img);
                }
         }else{
-            document.querySelector('div.error').innerHTML = 'Please fill all fields before submitting.';
-            document.querySelector('div.error').style.display = 'block';
+            displayError('Please fill all fields before submitting.');
         }   
     }
 }
 
-
-function addArticle(articleHeading,articleContent){
-      localStorage.setItem("heading",articleHeading);
-      console.log(localStorage.getItem("heading"))
-}
