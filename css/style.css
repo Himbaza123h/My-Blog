@@ -101,6 +101,10 @@ div.content{
     letter-spacing: .3px;
     line-height: 28px;
 }
+
+div.view-articles{
+    margin-top: 4em;
+}
 div.article-wrapper{
     grid-column: 3/11;
 }
@@ -115,7 +119,8 @@ div.article{
     padding: .2em;
     font-size: 22px;
     font-weight: bolder;
-    height: 40px;
+    min-height: 40px;
+    margin-top: 3em;
 }
 
   div.article-info{
@@ -151,6 +156,18 @@ div.article{
   div.comment-form{
       border-bottom: 0;
   }
+
+  div.comment-form-error{
+    padding: .7em;
+    border-left: 0.8em solid red;
+    margin: 3px;
+    background-color: #eee;
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom-left-radius: 1em;
+    border-top-left-radius: 1em;
+    display: none;
+  }
  
   div.article-comment .form-item{
       width: inherit;
@@ -170,6 +187,10 @@ div.article{
  .article-actions{
     margin-top: -1em;
     float: right;
+ }
+
+ label{
+     font-weight: bolder;
  }
  .user-img{
     float: left;
@@ -192,6 +213,11 @@ div.article{
     border: 2px solid #adb5bd;
 }
 
+.img-preview{
+    width: 300px;
+    height: 200px;
+    margin-bottom: 1em;
+}
 div.article-info .username{
     font-size: 19px;
     margin-left: 6px;
