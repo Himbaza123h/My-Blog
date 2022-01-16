@@ -10,14 +10,17 @@
   <body>
     <div class="container">
       <h1>Login</h1>
-      <form action="owner/index.html">
+      <div class="error">
+                sdfdsf
+      </div>
+      <form action="owner/index.html" id="login-form" >
         <div class="form-control">
-          <input type="text" required>
+          <input type="text" id="username">
           <label>Username</label>
         </div>
 
         <div class="form-control">
-          <input type="password" required>
+          <input type="password" id="password">
           <label>Password</label>
         </div>
 
@@ -26,6 +29,7 @@
         <p class="text">Don't have an account? <a href="#">Register</a> </p>
       </form>
     </div>
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/validation.js"></script>
   </body>
 </html>
