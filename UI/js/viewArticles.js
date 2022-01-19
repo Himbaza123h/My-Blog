@@ -1,7 +1,7 @@
 function viewArticles(){
      let parser = new DOMParser();
      let articles = JSON.parse(localStorage.getItem('articles'));
-      if (articles) {
+      if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
               <div class="article">
@@ -16,7 +16,9 @@ function viewArticles(){
                     <a href="./updateArticle.html?articleId=${article.articleId}"> 
                       <button class="btn btn-small btn-n-border btn-skyblue">Update</button>
                     </a>
-                      <button class="btn btn-small btn-n-border btn-red" value="${article.articleId}">Delete</button>
+                      <button class="btn btn-small btn-n-border btn-red" value="${article.articleId}" id="deleteArticle">
+                        Delete
+                      </button>
                   </div>
                 </div>
                 <div class="article-body">
@@ -41,5 +43,41 @@ function viewArticles(){
       }
 }        
 
+function truncateString(str) {
+  return str.length > 200 ? str.slice(0, 200) + ".........." : str;
+}
+    function viewBlog() {
+      
+      let parser = new DOMParser();
+      let articles = JSON.parse(localStorage.getItem('articles'));
+  
+      if (articles && articles.length > 0) {
+        articles.forEach(article =>{
+              let articleDiv = `
+              <a href="blog-article.html"> 
+              <div class="social skills">
+                <h3 style="text-align: center;">${article.heading}</h3>
+                <h5>${article.date}</h5>
+                      ${truncateString(article.content)}
+              </div>
+            </a>`;
+              let doc = (parser.parseFromString(articleDiv, 'text/html')).querySelector('a');
+                
+            let elementBefore = document.querySelector("div#blog.container").childNodes[3];
+            elementBefore.parentNode.insertBefore(doc,elementBefore)
 
-export {viewArticles};
+        })
+
+      }else{
+            let errorDiv = document.createElement('div'),
+                erroDivText = document.createTextNode("No Articles Currently");
+                errorDiv.appendChild(erroDivText);
+                errorDiv.classList.add('error')
+                errorDiv.classList.add('error-white');
+                let elementBefore = document.querySelector("div#blog.container").childNodes[3];
+                elementBefore.parentNode.insertBefore(errorDiv,elementBefore)
+            errorDiv.style.display = 'block';
+      }
+    }
+
+export {viewArticles,viewBlog};

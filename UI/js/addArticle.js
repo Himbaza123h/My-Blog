@@ -16,7 +16,8 @@ function addArticle(articleHeading,articleContent,articleImage){
  
      articles.push(newArticle);
     localStorage.setItem( "articles", JSON.stringify(articles));
-      //console.log( localStorage.getItem('articles'));
+    alert("New article Added successfully");
+    window.location= 'index.html';
 }
 
 export { addArticle }; 
