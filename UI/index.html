@@ -23,12 +23,12 @@
 
     .txt-type{
       font-size: 30px;
-      color: 0080A9;
+      color: #0080A9;
       font-weight: 400;
     }
     </style>
     </head>
-    <body>
+    <body id="home">
       <!-- The top navigation bar -->
       <div class="nav">
         <ul>
@@ -190,44 +190,11 @@
 
       <!-- Blog -->
       <div class="container" id="blog">
-        <div class="where-text" > 
+        <div class="where-text" style="font-size: 25px;color: #0080A9;"> 
           Latest Articles On My Blog 
           <i class="fas fa-hand-point-down"></i>  
         </div>
-        <a href="blog-article.html"> <div class="social skills">
-            <h3 style="text-align: center;">Hosting Content with Github Pages</h3>
-            <h5>February 21 2021</h5>
-
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore cumque repellat, odit non iste consequatur quo aperiam nam, dolores ullam optio aliquid voluptatibus fugiat at, reiciendis sint fugit itaque!
-
-            </div>
-          </a>
-          <a href="blog-article.html"> 
-              <div class="social skills">
-                            <h3 style="text-align: center;">Back-end Skills</h3>
-                            <h5>February 21 2021</h5>
-
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore cumque repellat, odit non iste consequatur quo aperiam nam, dolores ullam optio aliquid voluptatibus fugiat at, reiciendis sint fugit itaque!
-
-              </div>
-            </a>
-            <a href="blog-article.html"> 
-              <div class="social skills">
-                <h3 style="text-align: center;">Sending Emails With JavaScript</h3>
-                <h5>February 21 2021</h5>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore cumque repellat, odit non iste consequatur quo aperiam nam, dolores ullam optio aliquid voluptatibus fugiat at, reiciendis sint fugit itaque!
-
-              </div>
-            </a> 
-            <a href="blog-article.html"> 
-              <div class="social skills">
-                <h3 style="text-align: center;">How to sort a binary search tree</h3>
-                <h5>February 21 2021</h5>
-
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore cumque repellat, odit non iste consequatur quo aperiam nam, dolores ullam optio aliquid voluptatibus fugiat at, reiciendis sint fugit itaque!
-              </div>
-            </a>
-        <div class="where-text" > 
+        <div class="where-text" id="viewMoreArticles"> 
         <i class="fas fa-angle-double-right fa-1x" style="color: #0080A9;">
           <a href="blog.html">View More Articles on My Blog </a> 
         </i>  
@@ -324,7 +291,8 @@
       </div>
     </body>
 
-    <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/validation.js"></script>
+    <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/validation.js"></script>
 
 </html>

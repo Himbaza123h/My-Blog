@@ -1,12 +1,13 @@
 /*
-Author: Rukundo Kevin a.k.a The Pharmaci
+Author: Rukundo Kevin 
 Website: www.rukundokevin.codes;
 github:rukundo-kevin;
 */
-
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@300&family=Hahmlet:wght@200;800;900&display=swap');
 body{
 	margin:0;
 	background-color: #eee;
+  font-family: hamlet, sans-serif;
 }
 
 hr{
@@ -188,6 +189,7 @@ div#who .skills{
 	 margin-top:10px;
   	background-color: #eee;
  	text-align: left;
+   list-style: 32px;
 }
 
 div#who .skill-bar{
@@ -242,6 +244,7 @@ div#who #mocha{
 	padding: 10px 8px;
 	margin-top: 100px;
 	font-size: 20px;
+  line-height: 32px;
 }
 div#why{
   display: grid;
@@ -263,9 +266,14 @@ div#blog{
   grid-gap: 5px;
 }
 
+div#blog p{
+  font-family: 'BioRhyme', serif;
+  line-height:2.3em;
+
+}
 div#blog .social{
   margin-top: 3em;
-  min-height: 120px;
+  min-height: 148px;
   padding: 1em;
 }
 /* The social box in the list of blog articles */
@@ -287,6 +295,7 @@ div#blog   .where-text{
 div#blog a{
   text-decoration: none;
   color: black;
+  box-shadow: 0 3px 10px rgb(25 17 34 / 5%);
 }
 div#blog div.where-text a{
   color:#0080A9;
@@ -309,10 +318,12 @@ div#why .svg{
      box-shadow: none;
 }
 div#why .why-text,div#where .where-text{
-  font-weight: bolder;
+  font-weight: 900;
   font-size: 25px;
   grid-column-start: 1;
   grid-column-end: -1;
+  color:#0080A9;
+
 }
 .reading-text{
 	margin-top: 0em;
@@ -517,6 +528,8 @@ div#how {
   margin: 4em 6em;
   margin-bottom: 3em;
   background: #fff;
+  font-family: 'Hahmlet', serif;
+  line-height: 32px;
 }
 
 div#how div hr:nth-child(2){
@@ -555,8 +568,8 @@ div#how .last{
 }
 
 div.error{
-  padding: 1.4em;
-  border-left: .8em solid red;
+  padding: 1em;
+  border-left: .8em solid #df4759;
   margin: 3px;
   background-color: #eee;
   font-weight: 600;
@@ -566,9 +579,17 @@ div.error{
   display: none;
 }
 
+.short-error{
+   width: 50%;
+   margin-left: 3em;
+}
+.error-white{
+  background-color: #fff;
+  border: .1em solid #df4759;
+}
 div.add-article-error{
    margin-bottom: 1.4em;
-  min-width: 35%;
+   min-width: 35%;
 }
 
 div#how form{
@@ -602,7 +623,6 @@ div#how .btn{
 }
 
 .form-item input:focus,
-.form-item input:valid,
 .form-item textarea:focus {
   outline: 0;
   border-bottom-color: #0080A9;
@@ -610,9 +630,10 @@ div#how .btn{
 
 .form-item label {
   position: absolute;
-  top: 15px;
+  top: -2px;
   left: 0;
   pointer-events: none;
+  color: #333;
 }
 
  label > textarea{
@@ -625,10 +646,9 @@ div#how .btn{
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.form-item input:focus + label span,
-.form-item input:valid + label span {
+.form-item input:focus + label span {
   color: steelblue;
-  transform: translateY(-30px);
+  transform: translateY(-20px);
 }
 
 div.footer{
@@ -753,7 +773,7 @@ div:hover{
 
     .form-item {
       margin: 15px 0 20px;
-      width: 300px;
+      width: auto;
     }
     div.footer{
       grid-template-columns: 1fr;
