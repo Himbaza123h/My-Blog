@@ -84,9 +84,15 @@ div.sidebar div{
     margin: 2em 0;
 }
 
+div.sidebar div.profile-sidebar{
+    margin-top: 5em;
+}
+
 div.sidebar div:hover{
     color: #509ec3;
 }
+
+
 
 div.content{
     grid-column: 3/-1;
@@ -100,6 +106,10 @@ div.content{
     font-size: 18px;
     letter-spacing: .3px;
     line-height: 28px;
+}
+
+div.view-articles{
+    margin-top: 4em;
 }
 div.article-wrapper{
     grid-column: 3/11;
@@ -115,7 +125,8 @@ div.article{
     padding: .2em;
     font-size: 22px;
     font-weight: bolder;
-    height: 40px;
+    min-height: 40px;
+    margin-top: 3em;
 }
 
   div.article-info{
@@ -126,16 +137,19 @@ div.article{
 
    div.article-info #comment{
        color:#444;
-       font-weight: 900;
+       font-weight: 600;
        margin-left: 2em;
    }
 
    div.article-info #like{
     color:#444;
-    font-weight: 900;
-
+    font-weight: 600;
 }
-
+div.article-info #dislike{
+    color:#444;
+    font-weight: 600;
+    margin-left: 2em;
+}
   div.article-comments{
       min-height: 300px;
       border-left: 3px solid #888;
@@ -144,12 +158,23 @@ div.article{
   div.article-comment{
       border-bottom: 2px solid #888;
       margin-bottom: 1em;
-      margin-left: 1.2em;
 
   }
 
   div.comment-form{
       border-bottom: 0;
+  }
+
+  div.comment-form-error{
+    padding: .7em;
+    border-left: 0.8em solid red;
+    margin: 3px;
+    background-color: #eee;
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom-left-radius: 1em;
+    border-top-left-radius: 1em;
+    display: none;
   }
  
   div.article-comment .form-item{
@@ -160,16 +185,17 @@ div.article{
       border:2px solid #888;
       padding: 8px 0;
   }
-  div.article input:valid {
-    border: 2px solid #888;
-}
  
   div.article input:focus {
-    border: 2px solid #0080a9;
+    border: 1px solid #0080a9;
 }
  .article-actions{
     margin-top: -1em;
     float: right;
+ }
+
+ label{
+     font-weight: bolder;
  }
  .user-img{
     float: left;
@@ -192,6 +218,11 @@ div.article{
     border: 2px solid #adb5bd;
 }
 
+.img-preview{
+    width: 300px;
+    height: 200px;
+    margin-bottom: 1em;
+}
 div.article-info .username{
     font-size: 19px;
     margin-left: 6px;
@@ -225,21 +256,21 @@ div.blog-article-container {
     text-align: center;
  }
 
- .article-form-container{
-    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);    flex-direction: column;
-    align-content: flex-start;
-    align-items: flex-start;
-    min-height: auto;
-    padding: 2em;
-}
+ /* .article-form-container{
+} */
 
 .article-form-container form{
+    grid-column:2/10;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 1em;
+    padding: 1em;
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
 }
 .article-form-container .form-item{
     border: 1px solid #333;
+    max-width: 400px;
 }
 
 .article-form-container .form-item input{
@@ -252,8 +283,13 @@ div.blog-article-container {
     padding: 5px 0;
     font-size: 18px;
     color: #333;
+    max-width: 100%;
   }
   
+  .article-form-container .form-item input:focus, textarea:focus{
+      border: 1px solid #1cbcef;
+  }
+
   .article-form-container .form-item label {
     position: block;
     top: -34px;
@@ -263,9 +299,42 @@ div.blog-article-container {
 
  .article-form-container .btn{
      border-bottom: 1px solid;
+     padding: 10px 15px;
  }
 
-  
+div.profile{
+    margin: 1em 0 0em 4em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    max-width: 70%;
+    min-height: 40vh;
+}
+
+div.profile img{
+        height: 120px;
+        width: 120px;
+        border-radius: 50%;
+    
+}
+
+div.profile .btn{
+    box-shadow: 0 14px 28px 0 rgba(247, 80, 21, 0), 0 10px 15px 0 rgba(247, 80, 21, 0);
+    background-color: #0080A9;
+    color: #fff;
+}
+
+div.profile .btn:hover{
+    background-color: #fff;
+    border: 1px solid #0080A9;
+    border-radius: 0;
+    color: #111;
+}
+div.profile div{
+    padding: 1em;
+    font-weight: 900;
+}
  @media only screen and (max-width: 760px) {
     div.sidebar{
         left: -100%;
@@ -277,5 +346,9 @@ div.blog-article-container {
     }
     div.footer-blog{
         grid-column: 1/-1;
+    }
+    div.profile{
+        margin: 1em 0 0 0;
+        width: 100%;
     }
  }

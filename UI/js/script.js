@@ -1,8 +1,7 @@
 
-let $ = document;
 let text = "Rukundo Kevin is A ", speed = 300, id = 1;
-let txt = $.querySelector("#txt");
-let bars = $.querySelector(('#bars'));
+let txt =document.querySelector("#txt");
+let bars =document.querySelector(('#bars'));
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-ul");
 
@@ -32,14 +31,6 @@ function mobileMenu() {
     navMenu.classList.toggle("active");
 }
 
-
-type_text();
-
-function type_text(){
-    txt.innerHTML = `${text.slice(0,id)} `;
-    id++;
-    setTimeout(type_text,100);
-}
 
 
 // ES6 Class
@@ -115,6 +106,7 @@ document.addEventListener('scroll',function(){
 		//console.log('a' + window.scrollY);
 		document.querySelector('ul').classList.add('active');
 	}
+
 	else if(scrollY > 1120){
 		//console.log(window.scrollY);
 		document.querySelector('ul').classList.add('nav_white');
@@ -135,7 +127,3 @@ labels.forEach(label => {
         .join('')
 })
 
-
-document.addEventListener("resize",function(){
-   console.log(scrollX)
-})
