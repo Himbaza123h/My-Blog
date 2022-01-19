@@ -1,8 +1,7 @@
 
-let $ = document;
 let text = "Rukundo Kevin is A ", speed = 300, id = 1;
-let txt = $.querySelector("#txt");
-let bars = $.querySelector(('#bars'));
+let txt =document.querySelector("#txt");
+let bars =document.querySelector(('#bars'));
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-ul");
 

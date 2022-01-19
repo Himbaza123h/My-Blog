@@ -1,14 +1,18 @@
 import { addArticle } from './addArticle.js';
-
+import {addQuery } from './addQuery.js'
 let img ;
-  document.querySelector("#article-image").addEventListener("change",function(){
-    const reader = new FileReader();
+  document.addEventListener("DOMContentLoaded",function (e) {
+       if (document.body.id == 'addArticleFile' ) {
+        document.querySelector("#article-image").addEventListener("change",function(){
+            const reader = new FileReader();
 
-    reader.addEventListener("load",() =>{
-         img = reader.result;
-    });
+            reader.addEventListener("load",() =>{
+                img = reader.result;
+            });
 
-    reader.readAsDataURL(this.files[0]);
+            reader.readAsDataURL(this.files[0]);
+        })         
+       }
   })
 
 document.querySelector('form').addEventListener('submit',function(e){
@@ -46,16 +50,21 @@ function displayError(message){
 
 function validateInput(form){
       let formEle = filterForm(form);
-    
+     
         if (form.id == 'contact-form') {
-          
             if(!isEmpty(formEle)){
-                
+                let name = document.querySelector('#name').value,
+                email = document.querySelector('#email').value,
+                subject = document.querySelector('#subject').value,
+                message = document.querySelector('#message').value;
+                console.log(message)
+                  addQuery(name,email,subject,message);
             }else{
                 displayError('Please fill all fields before submitting.');
             }
      }else if(form.id == 'login-form'){
             if( !isEmpty(formEle)){
+               console.log ( document.querySelector('input'))
                 window.location = "owner/index.html"
             }else{
                 displayError('Please fill all fields before submitting.');

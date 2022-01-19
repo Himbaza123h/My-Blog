@@ -24,6 +24,8 @@ function updateArticle(image) {
             }
          })
          localStorage.setItem("articles",JSON.stringify(articles));
+         alert("The article updated successfully");
+         window.location= 'index.html';
     } 
 }
 

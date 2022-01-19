@@ -11,7 +11,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   margin: 0;
 }
@@ -94,12 +94,11 @@ div.error{
 .form-control input:focus {
   outline: 0;
   border-bottom-color: #0080A9;
-;
 }
 
 .form-control label {
   position: absolute;
-  top: 15px;
+  top: -2px;
   left: 0;
   pointer-events: none;
 }
@@ -113,9 +112,26 @@ div.error{
 
 .form-control input:focus + label span{
   color: steelblue;
-  transform: translateY(-30px);
+  transform: translateY(-20px);
+}
+
+.form-valid{
+  color: steelblue;
+  transform: translateY(-1px);
 }
 
 p.text a{
   color: #0080A9;
+}
+
+/* Change some css properties  when screen less than 768px */
+@media only screen and (max-width: 760px) {
+   body{
+    justify-content: flex-start;
+    margin: 1em;
+    min-height: 50vh;
+   }
+   .container{
+     padding:10px 20px;
+   }
 }

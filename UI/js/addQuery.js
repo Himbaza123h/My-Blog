@@ -1,17 +1,22 @@
 import { generateId } from './generateId.js';
 
 function addQuery(name,email,subject,message){
-    const article = {
-        heading :articleHeading,
-        content : articleContent,
-        date: new Date().toLocaleDateString(),
-        likes:0,
-        comments: 0
-    }
-    
-      localStorage.setItem(`${generateId()}`,JSON.stringify(article));
+    let temp = JSON.parse(localStorage.getItem('queries'));
+    let   queries = temp ? temp : [];
 
-      //console.log(localStorage.getItem(`${guid()}`))
+   const newQuery = {
+      articleId:`${generateId()}`,
+      name :name,
+      email : email,
+      date: new Date().toLocaleDateString(),
+      message:message,
+      subject:subject
+       }
+
+   queries.push(newQuery);
+  localStorage.setItem( "queries", JSON.stringify(queries));
+  alert("Your Feedback Submitted Succefully");
+  window.location= 'index.html';
 }
 
-export { addArticle }; 
+export { addQuery }; 
