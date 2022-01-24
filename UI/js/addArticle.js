@@ -1,6 +1,6 @@
 import { generateId } from './generateId.js';
 
-function addArticle(articleHeading,articleContent,articleImage){
+function addArticle(articleHeading,articleContent,articleImage,userId){
      let temp = JSON.parse(localStorage.getItem('articles'));
       let   articles = temp ? temp : [];
  
@@ -10,8 +10,7 @@ function addArticle(articleHeading,articleContent,articleImage){
         content : articleContent,
         date: new Date().toLocaleDateString(),
         image:articleImage,
-        likes:0,
-        comments: 0
+        userId:userId
      }
  
      articles.push(newArticle);
@@ -19,5 +18,6 @@ function addArticle(articleHeading,articleContent,articleImage){
     alert("New article Added successfully");
     window.location= 'index.html';
 }
+
 
 export { addArticle }; 
