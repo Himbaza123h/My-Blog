@@ -14,6 +14,7 @@ function addQuery(name,email,subject,message){
        }
 
    queries.push(newQuery);
+   
   localStorage.setItem( "queries", JSON.stringify(queries));
   alert("Your Feedback Submitted Succefully");
   window.location= 'index.html';

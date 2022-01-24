@@ -9,17 +9,18 @@ function viewArticles(){
                   ${article.heading}
                 </div>  
                 <div class="article-info">
+                
                   <img src="../img/RUKUNDO  KEVIN.jpg" alt="Rukundo Kevin Image" class="user-img img-bordered">
+                  <div class="article-actions ">
+                  <a href="./updateArticle.html?articleId=${article.articleId}"> 
+                    <button class="btn btn-small btn-n-border btn-skyblue">Update</button>
+                  </a>
+                    <button class="btn btn-small btn-n-border btn-red" value="${article.articleId}" id="deleteArticle">
+                      Delete
+                    </button>
+                </div>
                   <span class="username"> Rukundo Kevin </span> <br>
                   <span class="article-time">${article.date}</span>
-                  <div class="article-actions ">
-                    <a href="./updateArticle.html?articleId=${article.articleId}"> 
-                      <button class="btn btn-small btn-n-border btn-skyblue">Update</button>
-                    </a>
-                      <button class="btn btn-small btn-n-border btn-red" value="${article.articleId}" id="deleteArticle">
-                        Delete
-                      </button>
-                  </div>
                 </div>
                 <div class="article-body">
                   <p> 
@@ -27,6 +28,7 @@ function viewArticles(){
                   </p>   
                 </div>
                 <img src="${article.image}" class="img-big">   
+
               </div>`;
               let doc = (parser.parseFromString(articleDiv, 'text/html')).querySelector('.article');
             document.querySelector("#content").appendChild(doc);
@@ -46,6 +48,8 @@ function viewArticles(){
 function truncateString(str) {
   return str.length > 200 ? str.slice(0, 200) + ".........." : str;
 }
+
+
     function viewBlog() {
       
       let parser = new DOMParser();
@@ -54,7 +58,7 @@ function truncateString(str) {
       if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
-              <a href="blog-article.html"> 
+              <a href="blog-article.html?id=${article.articleId}"> 
               <div class="social skills">
                 <h3 style="text-align: center;">${article.heading}</h3>
                 <h5>${article.date}</h5>
@@ -81,3 +85,4 @@ function truncateString(str) {
     }
 
 export {viewArticles,viewBlog};
+
