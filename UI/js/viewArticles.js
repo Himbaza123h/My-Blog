@@ -1,7 +1,8 @@
 function viewArticles(){
      let parser = new DOMParser();
-     let articles = JSON.parse(localStorage.getItem('articles'));
-      if (articles && articles.length > 0) {
+
+
+     if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
               <div class="article">
@@ -51,7 +52,11 @@ function truncateString(str) {
 
 
     function viewBlog() {
-      
+
+      fetch('https://rukundo-kevin-blog.herokuapp.com')
+      .then(response => response.json())
+      .then(data => console.log(data));
+
       let parser = new DOMParser();
       let articles = JSON.parse(localStorage.getItem('articles'));
   
