@@ -179,7 +179,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
 	}
 })
 
-router.put("/:id", validateMiddleWare(validateArticle) ,async (req, res) => {
+router.put("/:id",verifyToken, validateMiddleWare(validateArticle) ,async (req, res) => {
 	try {
         let articleUser = await Article.findOne({_id: req.params.id})
         if (req.user["id"] == articleUser["userId"]) {
@@ -202,7 +202,7 @@ router.put("/:id", validateMiddleWare(validateArticle) ,async (req, res) => {
         }
 	} catch(err) {
 		res.status(404).send({ error: "We couldn't find that article " })
-        //console.log(err);
+        console.log(err);
 	}
 })
 
