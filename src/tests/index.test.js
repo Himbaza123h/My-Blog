@@ -24,9 +24,13 @@ chai.use(chaiHttp);
 
 //Our parent block
 describe('API', () => {
-
-    beforeEach((done) => { //Before each test we empty the database
-        User.deleteMany({},(err)=>{
+    let heading = "I have separated my interesting bussiness logic in pure javascript code but I can't find a way to test the routes that require a token in the headers of the http request."
+    before(async () => {  
+        await Article.deleteMany({heading:heading})
+        await Query.deleteMany({username:'Cook Indomie'})
+      })
+          beforeEach((done) => { //Before each test we empty the database
+        User.deleteMany({username:'Ronaldomessi@gmail.com'},(err)=>{
          //  console.log(config.get("DBHost"))
             done();
         });
@@ -106,6 +110,28 @@ describe('API', () => {
 
    describe("Article",()=>{
 
+    describe("/POST articles",() =>{
+        it(' should POST an article ', (done) => {
+            let query ={
+                "heading": "I have separated my interesting bussiness logic in pure javascript code but I can't find a way to test the routes that require a token in the headers of the http request.",
+                "content":"I have separated my interesting bussiness logic in pure javascript code but I can't find a way to test the routes that require a token in the headers of the http request.",
+                "image":"This is a message from a good friend of yours" 
+            }
+    
+          chai.request(server)
+              .post('/article')
+              .send(query)
+              .set('Authorization', 'JWT ' + token) //token is actual token data
+              .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('Message').eql('New Article Created');
+                done();
+              });
+        });
+     })
+
+
         describe("/GET articles",()=>{
             it(' should get all articles ', (done) => {
 
@@ -133,46 +159,9 @@ describe('API', () => {
             })
         })
 
-        describe("/POST articles",() =>{
-            it(' should POST an article ', (done) => {
-                let query ={
-                    "heading": "I have separated my interesting bussiness logic in pure javascript code but I can't find a way to test the routes that require a token in the headers of the http request.",
-                    "content":"I have separated my interesting bussiness logic in pure javascript code but I can't find a way to test the routes that require a token in the headers of the http request.",
-                    "image":"This is a message from a good friend of yours" 
-                }
-        
-              chai.request(server)
-                  .post('/article')
-                  .send(query)
-                  .set('Authorization', 'JWT ' + token) //token is actual token data
-                  .end((err, res) => {
-                        res.should.have.status(201);
-                        res.body.should.be.a('object');
-                        res.body.should.have.property('Message').eql('New Article Created');
-                    done();
-                  });
-            });
-         })
    })
 
    describe("Query",()=>{
-    describe("/GET queries",()=>{
-        it(' should get queries ', (done) => {
-
-            chai.request(server)
-                .get('/query')
-                .set('Authorization', 'JWT ' + token) 
-                .end(function(err, res) {
-                    res.should.have.status(200);
-                    res.body.should.be.a('array');
-                    res.body[0].should.have.property('name');
-                    res.body[0].should.have.property('email');
-                    res.body[0].should.have.property('subject');
-                    res.body[0].should.have.property('message');
-                    done();
-                });
-        })
-    })
 
     describe("/POST query",() =>{
         it(' should POST a query ', (done) => {
@@ -195,6 +184,25 @@ describe('API', () => {
               });
         });
      })
+
+    describe("/GET queries",()=>{
+        it(' should get queries ', (done) => {
+
+            chai.request(server)
+                .get('/query')
+                .set('Authorization', 'JWT ' + token) 
+                .end(function(err, res) {
+                    res.should.have.status(200);
+                    res.body.should.be.a('array');
+                    res.body[0].should.have.property('name');
+                    res.body[0].should.have.property('email');
+                    res.body[0].should.have.property('subject');
+                    res.body[0].should.have.property('message');
+                    done();
+                });
+        })
+    })
+
    })
 
    describe("Likes",()=>{
