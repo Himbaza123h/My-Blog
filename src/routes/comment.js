@@ -57,12 +57,27 @@ router.get("/:id", async (req,res) =>{
     try {
         const comments = await Comment.find({})
     
-        res.send({comments: comments.length})   
+        res.send({comments: comments})   
     } catch(error)  {
         console.error(error);
         res.sendStatus(404).send("Comment not found");
     }
 })
+
+router.get("/article/:id", async (req,res) =>{
+    try {
+        const comments = await Comment.find({articleId:req.params.id})
+        if (comments) {
+            res.send({comments: comments})   
+        }else{
+            res.status(404).send("No comment for this article")
+        }
+    } catch(error)  {
+       // console.error(error);
+        res.sendStatus(404).send("No comments for this article");
+    }
+})
+
 
 /** 
 * @swagger
