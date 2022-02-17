@@ -69,7 +69,7 @@ router.get("/article/:id", async (req,res) =>{
     try {
         const comments = await Comment.find({articleId:req.params.id})
         if (comments) {
-            res.send({comments: comments})   
+            res.send(comments)   
         }else{
             res.status(404).send("No comment for this article")
         }
