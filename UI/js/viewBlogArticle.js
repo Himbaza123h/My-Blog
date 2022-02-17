@@ -1,5 +1,17 @@
-import {addLike,addDislike,getLikes,getDislike} from './addLike.js'
+import {addLike,addDislike,displayLikes,getDislike} from './addLike.js'
 import { addComment,viewComments } from './addComment.js';
+
+function  isLoggedIn() {
+     let signIn = document.querySelector("#signIn");
+       if (localStorage.getItem("token")) {
+          signIn.href = 'sign-out.html';
+          signIn.childNodes[1].childNodes[1].innerHTML = 'Sign out';    
+          return true;       
+       }
+    else{
+     return false;
+    }  
+}
 
 function viewBlogArticle(){
     let id = [...document.location.search].splice(4).join("");
@@ -49,12 +61,12 @@ function viewBlogArticle(){
   
                  id = [...document.location.search].splice(4).join("");
   
-                 likeNumber.innerHTML = getLikes(id);
+                 displayLikes(id);
                  dislikeNumber.innerHTML = getDislike(id);
   
                 like.addEventListener("click",function (e) {
                      if(isLoggedIn()){
-                          addLike(id,getUserId(),like);
+                          addLike(id,like);
                      }else{
                       alert("You should be Logged in to Like an article")
                  }
