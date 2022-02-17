@@ -10,6 +10,10 @@ function viewQueries(){
                return res.json();
              }     
         }).then((data)=>{
+          document.querySelector(".article-form-container").style.display = 'grid';
+          document.querySelector(".article-form-container").style.opacity = '1';
+          document.querySelector(".loader").style.opacity = '0';
+          document.querySelector(".loader").style.display = 'none';
             let  queries = data;
             if (queries && queries.length > 0) {
               queries.forEach(query =>{

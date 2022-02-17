@@ -19,6 +19,11 @@ function viewBlogArticle(){
     fetch(`https://rukundo-kevin-blog.herokuapp.com/article/${id}`)
     .then(response => response.json())
     .then(data => {
+         document.querySelector(".wrapper").style.display = 'grid';
+         document.querySelector(".wrapper").style.opacity = '1';
+         document.querySelector(".loader").style.opacity = '0';
+         document.querySelector(".loader").style.display = 'none';
+
     let article = data;
                     let articleDiv = `
                     <div class="header">

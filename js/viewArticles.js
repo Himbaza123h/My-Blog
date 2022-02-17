@@ -3,6 +3,11 @@ function viewArticles(){
   fetch('https://rukundo-kevin-blog.herokuapp.com/article')
   .then(response => response.json())
   .then(data => {
+    document.querySelector(".wrapper").style.display = 'grid';
+    document.querySelector(".wrapper").style.opacity = '1';
+    document.querySelector(".loader").style.opacity = '0';
+    document.querySelector(".loader").style.display = 'none';
+  
      let parser = new DOMParser();
      let articles = data;
      if (articles && articles.length > 0) {
