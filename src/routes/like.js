@@ -147,7 +147,7 @@ router.post("/",verifyToken,validateMiddleWare(validateLike) , async (req,res) =
             await newLike.save();
         res.status(201).send({Message:"Like added successfully"})    
     } else {
-        res.status(400).send({Message: "User already liked the article"})
+        res.status(405).send({Message: "User already liked the article"})
     }
      
    } catch (error){
