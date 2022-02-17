@@ -84,7 +84,7 @@ router.get("/user/:id", async (req,res) =>{
         const user = await User.findOne({_id:req.params.id})
         if (user) {
             console.log(user)
-            res.send({user.email})   
+            res.send({"email": user.email})   
         }else{
             res.status(206).send("User not found")
         }
