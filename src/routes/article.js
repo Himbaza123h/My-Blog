@@ -193,7 +193,7 @@ router.put("/:id",verifyToken, async (req, res) => {
                 article.content = req.body.content
             }
             if (req.body.image) {
-                article.content = req.body.content
+                article.image = req.body.image
             }
             await article.save()
             res.status(200).send(article)
