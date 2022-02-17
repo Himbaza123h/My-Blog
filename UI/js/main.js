@@ -82,49 +82,7 @@ document.addEventListener("DOMContentLoaded",function(){
          case 'blogArticleFile':
               viewBlogArticle();
               viewComments();
-              let like = document.querySelector("#like"),
-               dislike = document.querySelector("#dislike"),
-               commentBtn = document.querySelector("#comment"),
-               commentValue =document.querySelector("#commentValue"),
-
-               likeNumber = document.querySelector("#likeNumber"),
-               dislikeNumber = document.querySelector("#dislikeNumber");
-
-               id = [...document.location.search].splice(4).join("");
-
-               likeNumber.innerHTML = getLikes(id);
-               dislikeNumber.innerHTML = getDislike(id);
-
-              like.addEventListener("click",function (e) {
-                   if(isLoggedIn()){
-                        addLike(id,getUserId(),like);
-                   }else{
-                    alert("You should be Logged in to Like an article")
-               }
-                })
-
-                commentBtn.addEventListener("click",function (e) {
-               e.preventDefault();
-               if(isLoggedIn()){
-                    if(commentValue.value.length > 5){
-                         addComment(id,getUserId(),commentValue.value);
-                    }else{
-                         document.querySelector('div.comment-form-error').innerHTML = "The comment shouldn't be blank or less than 5 characters";
-                         document.querySelector('div.comment-form-error').style.display = 'block'; 
-                    }
-               }else{
-                    document.querySelector('div.comment-form-error').innerHTML = 'You need to login to be able to comment';
-                    document.querySelector('div.comment-form-error').style.display = 'block'; 
-               }
-              })
-
-              dislike.addEventListener("click",function (e) {
-                   if(isLoggedIn()){
-                        addDislike(id,getUserId(),like);
-                   }else{
-                        alert("You should be Logged in to dislike")
-                   }
-                })
+ 
          break;
          default:
               break;

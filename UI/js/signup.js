@@ -28,6 +28,7 @@ function signup(username,password){
 }
 
 function signin(username,password){
+  
     const user = {
         email :username,
         password : password,
@@ -47,6 +48,8 @@ function signin(username,password){
            return res.json();
       }).then(user=>{
             localStorage.setItem("token",user.token)
+            localStorage.setItem("userType",user.type)
+
             alert("Logged In Successfully");
             user.type == 'admin' ? (window.location = 'owner/index.html') : (window.location = 'index.html' );
       })

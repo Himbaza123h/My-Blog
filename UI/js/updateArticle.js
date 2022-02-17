@@ -13,19 +13,17 @@ function fetchUpdateArticle() {
 function updateArticle(image) {
     let id = [...document.location.search].splice(11).join(""),
         heading = document.querySelector("#article-heading").value,
-        content = document.querySelector("#article-heading").value,
+        content = document.querySelector("#article-content").value,
         bearer = `Bearer ${localStorage.getItem("token")}`;
 
      const updatedArticle = {
-        heading ,
-        content ,
-        image
+        heading : heading,
+        content : content ,
+        image : image
      }
-
      fetch(`https://rukundo-kevin-blog.herokuapp.com/article/${id}`, {
         method: 'PUT',
         headers: {
-          'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
           'Authorization': bearer
         },
@@ -33,14 +31,14 @@ function updateArticle(image) {
       }).then(res => {
          if (res.ok) {
             alert("The article updated successfully");
-            //window.location= 'index.html';         
+            window.location= 'index.html';         
          }else{
              console.log(res)
          }
-       }).catch((err)=>{
+       }).then(data=>console.log)
+       .catch((err)=>{
            alert("Problem connecting to the server")
        })
 }
-
 
 export { fetchUpdateArticle ,updateArticle};

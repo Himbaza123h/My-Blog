@@ -8,18 +8,8 @@
 </head>
 <body>
     <script >
-    let signIn = document.querySelector("#signIn");
-    let users = JSON.parse(localStorage.getItem('users'));
-
-     if (users && users.length > 0) {
-       users.forEach(user =>{
-           if (user.loggedIn) {
-               user.loggedIn = false;
-               localStorage.setItem( "users", JSON.stringify(users));
-               window.location = 'index.html';
-           }
-       })
-     }
+        localStorage.removeItem("token");
+        window.location = "index.html";
     </script>
 </body>
 </html>
