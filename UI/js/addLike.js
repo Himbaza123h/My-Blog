@@ -1,16 +1,22 @@
 
+function displayLikes(article){
+    const comments = fetch(`https://rukundo-kevin-blog.herokuapp.com/like/article/${article}`)
+     .then(response => {
+       if(response.ok){
+        return response.json()
+       }
+     })
+     .then(likes => { 
 
-function  getLikes(id) {
-    let temp = JSON.parse(localStorage.getItem('likes')),
-    likes = temp ? temp : [],
-    articleLikes = 0;
-
-
-    likes.forEach(like =>{
-    (like.articleId == id)?articleLikes++:'';
-    })
-   return articleLikes;
+        document.querySelector("#likeNumber").innerHTML =likes.likes;
+       // document.querySelector("#dislikeNumber").innerHTML = getDislike(id);
+     })
+     .catch((err)=>{
+        console.log(err)
+     })
+     return comments;
    }
+   
 
 function  getDislike(id) {
     let temp = JSON.parse(localStorage.getItem('dislikes')),
@@ -24,41 +30,30 @@ function  getDislike(id) {
 }
 
 
-function addLike(id,userId,likeEl) {
-    let temp = JSON.parse(localStorage.getItem('likes')),
-         likes = temp ? temp : [],
-         articleLikes = 0,
-         c= 0;
-   
-         //first remove the dislike
-         let tempDislike = JSON.parse(localStorage.getItem('dislikes'));
-         let   dislikes = tempDislike ? tempDislike : [];
-   
-           dislikes.forEach((dislike,idx)=>{
-               if(dislike.userId == userId && dislike.articleId == id){
-                   dislikes.splice(idx,1);
-               }
-           })
-           localStorage.setItem( "dislikes", JSON.stringify(dislikes)); 
+function addLike(id,likeEl) {
 
-         
-    likes.forEach(like =>{
-         (like.userId == userId && like.articleId == id)?c++:'';
-    })
-
-    if (c == 0) {
-        const newLike = {
-            articleId :id,
-            userId:userId
-         }
-    
-        likes.push(newLike);
-        localStorage.setItem( "likes", JSON.stringify(likes));  
-    }
-
-    document.querySelector("#likeNumber").innerHTML = getLikes(id);
-    document.querySelector("#dislikeNumber").innerHTML = getDislike(id);
-
+    const newLike = {
+        articleId :id,
+     }
+    let  bearer = `Bearer ${localStorage.getItem("token")}`;
+  
+     fetch('https://rukundo-kevin-blog.herokuapp.com/like', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          'Authorization': bearer
+        },
+        body: JSON.stringify(newLike)
+        }).then(res => {
+           if(res.status == 405){
+               alert("You have already liked this article")
+           }
+            displayLikes(id);
+        }).catch((err)=>{
+            alert("Problem connecting to the server")
+            console.log(err)
+        })
 }
 
 function addDislike(id,userId,likeEl) {
@@ -97,4 +92,4 @@ function addDislike(id,userId,likeEl) {
 }
 
 
-export {addLike,addDislike,getLikes,getDislike}
+export {addLike,addDislike,displayLikes,getDislike}

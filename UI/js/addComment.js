@@ -20,12 +20,30 @@ function addComment(id,userId,commentValue){
     location.reload();
 }
 
-function getUsername(userId){
-  fetch(`https://rukundo-kevin-blog.herokuapp.com/user/${id}`)
-  .then(response => response.json())
-  .then(data => {   
-    return username;
+function displayComment(comment){
+ const comments = fetch(`https://rukundo-kevin-blog.herokuapp.com/comment/user/${comment.userId}`)
+  .then(response => {
+    if(response.status == 200){
+     return response.json()
+    }else if(response.status == 206){
+      return {"email": 'John Doe'};
+    }
   })
+  .then(data => { 
+  let commentDiv = `
+    <span class="username username-comment"> ${data.email} </span> <br>
+       ${comment.comment}
+    `;
+    let d = document.createElement('div');
+    d.classList.add("article-comment")
+    d.innerHTML = commentDiv;
+     // console.log( document.querySelector(".article-comments").lastChild)
+     document.querySelector(".article-comments").insertBefore(d,document.querySelector(".article-comments").lastChild); 
+  })
+  .catch((err)=>{
+     console.log(err)
+  })
+  return comments;
 }
 
 function viewComments(){
@@ -36,19 +54,8 @@ function viewComments(){
   .then(data => {
     let parser = new DOMParser();
     let comments = data;
-    console.log(data)
        comments.forEach(comment =>{
-           if (comment.articleId == id) {
-            let commentDiv = `
-            <span class="username username-comment"> ${getUsername(comment.userId)} </span> <br>
-               ${comment.comment}
-            `;
-              let d = document.createElement('div');
-              d.classList.add("article-comment")
-              d.innerHTML = commentDiv;
-              console.log( document.querySelector(".article-comments").lastChild)
-            document.querySelector(".article-comments").insertBefore(d,document.querySelector(".article-comments").lastChild); 
-           }
+              displayComment(comment)
        })
      
     })

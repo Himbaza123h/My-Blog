@@ -3,8 +3,8 @@ import {fetchUpdateArticle,updateArticle} from './updateArticle.js';
 import {deleteArticle} from './deleteArticle.js'
 import {viewQueries} from './viewQueries.js'
 import { viewBlogArticle } from './viewBlogArticle.js';
-import {addLike,addDislike,getLikes,getDislike} from './addLike.js'
-import { addComment,viewComments } from './addComment.js';
+// import {addLike,addDislike,getLikes,getDislike} from './addLike.js'
+// import { addComment,viewComments } from './addComment.js';
 
 function  isLoggedIn() {
      let signIn = document.querySelector("#signIn");
