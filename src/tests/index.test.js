@@ -30,7 +30,7 @@ describe('API', () => {
         await Query.deleteMany({username:'Cook Indomie'})
       })
           beforeEach((done) => { //Before each test we empty the database
-        User.deleteMany({username:'Ronaldomessi@gmail.com'},(err)=>{
+        User.deleteMany({email:'Ronaldomessi@gmail.com'},(err)=>{
          //  console.log(config.get("DBHost"))
             done();
         });
