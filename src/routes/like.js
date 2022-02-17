@@ -96,6 +96,31 @@ router.get("/:id", async (req,res) =>{
 
 })
 
+
+
+router.get("/dislike/:id", async (req,res) =>{
+    try {
+        const dislikes = await Dislike.find({articleId:req.params.id})
+    
+        res.status(200).send({dislikes: dislikes.length})   
+    } catch(error)  {
+        // console.error(error);
+        res.status(404).send({Message:"No dislikes for this particular article"});
+    }
+
+})
+
+router.get("/:id", async (req,res) =>{
+    try {
+        const like = await Like.find({_id:req.params.id})
+    
+        res.status(200).send({like: like})   
+    } catch(error)  {
+        // console.error(error);
+        res.status(404).send({Message:"No like for this particular article"});
+    }
+
+})
 /** 
 * @swagger
 * /like:
@@ -132,23 +157,24 @@ router.post("/",verifyToken,validateMiddleWare(validateLike) , async (req,res) =
    try {
    let likeExists = await Like.findOne({articleId:req.body.articleId, userId: req.user["id"]});
    let dislikeExists = await Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
-  console.log(likeExists)
    //check if user has disliked article and remove dislike
    if (dislikeExists) {
-    await Dislike.deleteOne({ articleId: req.params.id , userId:req.user["id"]})
+       await Dislike.deleteOne({ articleId: req.body.articleId , userId:req.user["id"]})
     }
-   //Add New like if a user have previously liked the article
-    if (!likeExists) {
-        const newLike = new Like({
-            articleId : req.body.articleId,
-            userId : req.user["id"]
-            })
-    
-            await newLike.save();
-        res.status(201).send({Message:"Like added successfully"})    
-    } else {
-        res.status(405).send({Message: "User already liked the article"})
-    }
+    else{
+        //Add New like if a user have previously liked the article
+            if (!likeExists) {
+                const newLike = new Like({
+                    articleId : req.body.articleId,
+                    userId : req.user["id"]
+                    })
+            
+                    await newLike.save();
+                res.status(201).send({Message:"Like added successfully"})    
+            } else {
+                res.status(405).send({Message: "User already liked the article"})
+            }
+   }
      
    } catch (error){
        res.sendStatus(500).send({error:"There was a problem adding a like"})
@@ -187,17 +213,17 @@ router.post("/",verifyToken,validateMiddleWare(validateLike) , async (req,res) =
 
 router.delete("/:id", verifyToken,validateMiddleWare(validateLike), async (req, res) => {
 	try {
-        //ch if a user has previously liked the article
+        //check if a user has previously liked the article
         let likeExists = Like.findOne({articleId:req.body.articleId, userId: req.user["id"]});
          if (likeExists) {
             await Like.deleteOne({ articleId: req.params.id , userId:req.user["id"]})
          }
-         let dislikeExists = Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
+         let dislikeExists =await Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
 
          //check if user has disliked article and remove dislike
          if (dislikeExists) {
-          await Dislike.deleteOne({ articleId: req.params.id , userId:req.user["id"]})
-          }else{
+            res.status(405).send({Message: "User already disliked the article"})
+        }else{
             const newDislike = new Dislike({
                 articleId : req.body.articleId,
                 userId : req.user["id"]
@@ -205,7 +231,7 @@ router.delete("/:id", verifyToken,validateMiddleWare(validateLike), async (req, 
         
                 await newDislike.save();
 
-            res.status(201).send({Message:"you have dislike this article"}) 
+            res.status(201).send({Message:"you have disliked this article"}) 
             }
 	} catch {
 		res.status(500).send({ error: "Problem disliking" })
