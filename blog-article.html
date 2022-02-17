@@ -15,6 +15,15 @@
  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
  <!-- <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">  -->
+
+ <style>
+   .loader {
+  display: flex;
+  justify-content: center;
+	align-items: center;
+  height: 100vh;
+}
+ </style>
 </head>
 <body id="blogArticleFile">
   <!-- The top navigation bar -->
@@ -44,7 +53,12 @@
 
     </ul>
   </nav>
-  <div class="wrapper ">
+  <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="wrapper " style="opacity:0;display:none">
           <div class="content article-wrapper">
             <div class="article">
                 <div class="header">
