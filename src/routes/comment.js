@@ -6,6 +6,7 @@ const router = express.Router();
 const validateMiddleWare = require('../middlewares/validateMiddleware')
 
 import { verifyToken } from "../controllers/verifyToken";
+import { User } from "../models/User";
 
 /**
  * @swagger
@@ -78,6 +79,20 @@ router.get("/article/:id", async (req,res) =>{
     }
 })
 
+router.get("/user/:id", async (req,res) =>{
+    try {
+        const user = await User.findOne({_id:req.params.id})
+        if (user) {
+            console.log(user)
+            res.send(user.email)   
+        }else{
+            res.status(404).send("User not found")
+        }
+    } catch(error)  {
+       // console.error(error);
+        res.sendStatus(404).send("User not found");
+    }
+})
 
 /** 
 * @swagger

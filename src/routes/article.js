@@ -183,7 +183,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
 	}
 })
 
-router.put("/:id",verifyToken, validateMiddleWare(validateArticle) ,async (req, res) => {
+router.put("/:id",verifyToken, async (req, res) => {
 	try {
         let articleUser = await Article.findOne({_id: req.params.id})
         if (req.user["id"] == articleUser["userId"]) {
@@ -197,7 +197,7 @@ router.put("/:id",verifyToken, validateMiddleWare(validateArticle) ,async (req, 
                 article.content = req.body.content
             }
             if (req.body.image) {
-                article.content = req.body.content
+                article.image = req.body.image
             }
             await article.save()
             res.status(200).send(article)
