@@ -34,9 +34,13 @@ function getUsername(userId){
 }
 
 function viewComments(){
-    let id = [...document.location.search].splice(4).join("");
+  let id = [...document.location.search].splice(4).join("");
+
+  fetch(`https://rukundo-kevin-blog.herokuapp.com/comment/${id}`)
+  .then(response => response.json())
+  .then(data => {
     let parser = new DOMParser();
-    let comments = JSON.parse(localStorage.getItem('comments'));
+    let comments = data;
      if (comments && comments.length > 0) {
        comments.forEach(comment =>{
            if (comment.articleId == id) {
@@ -49,12 +53,12 @@ function viewComments(){
               d.innerHTML = commentDiv;
               console.log( document.querySelector(".article-comments").lastChild)
             document.querySelector(".article-comments").insertBefore(d,document.querySelector(".article-comments").lastChild); 
-
            }
-
        })
      }else{
+     //  console.log(data)
      }
+    })
 } 
 
 export { addComment ,viewComments}; 
