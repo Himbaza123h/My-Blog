@@ -130,9 +130,9 @@ router.get("/:id", async (req,res) =>{
 
 router.post("/",verifyToken,validateMiddleWare(validateLike) , async (req,res) =>{
    try {
-   let likeExists = Like.findOne({articleId:req.body.articleId, userId: req.user["id"]});
-   let dislikeExists = Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
-
+   let likeExists = await Like.findOne({articleId:req.body.articleId, userId: req.user["id"]});
+   let dislikeExists = await Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
+  console.log(likeExists)
    //check if user has disliked article and remove dislike
    if (dislikeExists) {
     await Dislike.deleteOne({ articleId: req.params.id , userId:req.user["id"]})
@@ -147,7 +147,7 @@ router.post("/",verifyToken,validateMiddleWare(validateLike) , async (req,res) =
             await newLike.save();
         res.status(201).send({Message:"Like added successfully"})    
     } else {
-        res.status(400).send({Message: "User already liked the article"})
+        res.status(405).send({Message: "User already liked the article"})
     }
      
    } catch (error){
