@@ -68,7 +68,7 @@ function viewBlogArticle(){
                      if(isLoggedIn()){
                           addLike(id,like);
                      }else{
-                      alert("You should be Logged in to Like an article")
+                      window.location = "../sign-in.html";
                  }
                   })
   
@@ -76,13 +76,14 @@ function viewBlogArticle(){
                  e.preventDefault();
                  if(isLoggedIn()){
                       if(commentValue.value.length > 5){
-                           addComment(id,getUserId(),commentValue.value);
+                           addComment(id,commentValue.value);
                       }else{
                            document.querySelector('div.comment-form-error').innerHTML = "The comment shouldn't be blank or less than 5 characters";
                            document.querySelector('div.comment-form-error').style.display = 'block'; 
                       }
                  }else{
-                      document.querySelector('div.comment-form-error').innerHTML = 'You need to login to be able to comment';
+                      document.querySelector('div.comment-form-error').innerHTML = `You need to login to be able to comment   <a href= "../sign-in.html" style ="color:#0275d8
+                      ">Login</a>`;
                       document.querySelector('div.comment-form-error').style.display = 'block'; 
                  }
                 })
@@ -91,7 +92,7 @@ function viewBlogArticle(){
                      if(isLoggedIn()){
                           addDislike(id,like);
                      }else{
-                          alert("You should be Logged in to dislike")
+                         window.location = "../sign-in.html";
                      }
                   })
     })
