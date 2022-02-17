@@ -96,6 +96,31 @@ router.get("/:id", async (req,res) =>{
 
 })
 
+
+
+router.get("/dislike/:id", async (req,res) =>{
+    try {
+        const dislikes = await Dislike.find({articleId:req.params.id})
+    
+        res.status(200).send({dislikes: dislikes.length})   
+    } catch(error)  {
+        // console.error(error);
+        res.status(404).send({Message:"No dislikes for this particular article"});
+    }
+
+})
+
+router.get("/:id", async (req,res) =>{
+    try {
+        const like = await Like.find({_id:req.params.id})
+    
+        res.status(200).send({like: like})   
+    } catch(error)  {
+        // console.error(error);
+        res.status(404).send({Message:"No like for this particular article"});
+    }
+
+})
 /** 
 * @swagger
 * /like:
