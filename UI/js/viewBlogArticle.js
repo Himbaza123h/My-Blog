@@ -38,7 +38,6 @@ function viewBlogArticle(){
                         </div>
                     </div>`;
                 document.querySelector(".article").innerHTML = articleDiv;
-                viewBlogArticle();
                 viewComments();
                 let like = document.querySelector("#like"),
                  dislike = document.querySelector("#dislike"),

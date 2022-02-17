@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded",function(){
          break;
          case 'blogArticleFile':
               viewBlogArticle();
-              viewComments();
  
          break;
          default:
