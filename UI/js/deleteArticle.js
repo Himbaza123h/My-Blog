@@ -1,19 +1,21 @@
 function deleteArticle(articleId) {
-    let articles = JSON.parse(localStorage.getItem('articles'));
-     if (articles) {
-         let res = confirm("Do you really want to delete this article?")
-         if (res) {
-            articles.forEach((article,id)=>{
-                if (article["articleId"] == articleId) {
-                    articles.splice(id,1);
+    let res = confirm("Do you really want to delete this article?"),
+        bearer = `Bearer ${localStorage.getItem("token")}`;
+      if (res) {
+        fetch(`https://rukundo-kevin-blog.herokuapp.com/article/${articleId}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': bearer
+            }
+            }).then(res => {
+                if (res.ok) {
+                    alert("The article Deleted successfully");
+                    window.location= 'index.html';
                 }
-            })
-            console.log(articles)
-             localStorage.setItem("articles",JSON.stringify(articles));
-             alert("The article Deleted successfully");
-             window.location= 'index.html';
-        }
-    } 
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
 }
 
 export {deleteArticle}

@@ -1,7 +1,10 @@
 function viewArticles(){
+
+  fetch('https://rukundo-kevin-blog.herokuapp.com/article')
+  .then(response => response.json())
+  .then(data => {
      let parser = new DOMParser();
-
-
+     let articles = data;
      if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
@@ -13,10 +16,10 @@ function viewArticles(){
                 
                   <img src="../img/RUKUNDO  KEVIN.jpg" alt="Rukundo Kevin Image" class="user-img img-bordered">
                   <div class="article-actions ">
-                  <a href="./updateArticle.html?articleId=${article.articleId}"> 
+                  <a href="./updateArticle.html?articleId=${article._id}"> 
                     <button class="btn btn-small btn-n-border btn-skyblue">Update</button>
                   </a>
-                    <button class="btn btn-small btn-n-border btn-red" value="${article.articleId}" id="deleteArticle">
+                    <button class="btn btn-small btn-n-border btn-red" value="${article._id}" id="deleteArticle">
                       Delete
                     </button>
                 </div>
@@ -44,6 +47,7 @@ function viewArticles(){
                 errorDiv.style.display = 'block';
                document.querySelector('#content').appendChild(errorDiv);
       }
+    })
 }        
 
 function truncateString(str) {
@@ -53,17 +57,17 @@ function truncateString(str) {
 
     function viewBlog() {
 
-      fetch('https://rukundo-kevin-blog.herokuapp.com')
+      fetch('https://rukundo-kevin-blog.herokuapp.com/article')
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {
 
       let parser = new DOMParser();
-      let articles = JSON.parse(localStorage.getItem('articles'));
+      let articles = data.splice(0,3);
   
       if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
-              <a href="blog-article.html?id=${article.articleId}"> 
+              <a href="blog-article.html?id=${article._id}"> 
               <div class="social skills">
                 <h3 style="text-align: center;">${article.heading}</h3>
                 <h5>${article.date}</h5>
@@ -74,7 +78,6 @@ function truncateString(str) {
                 
             let elementBefore = document.querySelector("div#blog.container").childNodes[3];
             elementBefore.parentNode.insertBefore(doc,elementBefore)
-
         })
 
       }else{
@@ -87,6 +90,8 @@ function truncateString(str) {
                 elementBefore.parentNode.insertBefore(errorDiv,elementBefore)
             errorDiv.style.display = 'block';
       }
+    });
+
     }
 
 export {viewArticles,viewBlog};
