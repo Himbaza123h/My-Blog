@@ -62,7 +62,7 @@ function viewBlogArticle(){
                  id = [...document.location.search].splice(4).join("");
   
                  displayLikes(id);
-                 dislikeNumber.innerHTML = getDislike(id);
+                 getDislike(id);
   
                 like.addEventListener("click",function (e) {
                      if(isLoggedIn()){
@@ -89,7 +89,7 @@ function viewBlogArticle(){
   
                 dislike.addEventListener("click",function (e) {
                      if(isLoggedIn()){
-                          addDislike(id,getUserId(),like);
+                          addDislike(id,like);
                      }else{
                           alert("You should be Logged in to dislike")
                      }
