@@ -1,7 +1,11 @@
 function viewArticles(){
+
+  fetch('https://rukundo-kevin-blog.herokuapp.com/article')
+  .then(response => response.json())
+  .then(data => {
      let parser = new DOMParser();
-     let articles = JSON.parse(localStorage.getItem('articles'));
-      if (articles && articles.length > 0) {
+     let articles = data;
+     if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
               <div class="article">
@@ -9,17 +13,18 @@ function viewArticles(){
                   ${article.heading}
                 </div>  
                 <div class="article-info">
+                
                   <img src="../img/RUKUNDO  KEVIN.jpg" alt="Rukundo Kevin Image" class="user-img img-bordered">
+                  <div class="article-actions ">
+                  <a href="./updateArticle.html?articleId=${article._id}"> 
+                    <button class="btn btn-small btn-n-border btn-skyblue">Update</button>
+                  </a>
+                    <button class="btn btn-small btn-n-border btn-red" value="${article._id}" id="deleteArticle">
+                      Delete
+                    </button>
+                </div>
                   <span class="username"> Rukundo Kevin </span> <br>
                   <span class="article-time">${article.date}</span>
-                  <div class="article-actions ">
-                    <a href="./updateArticle.html?articleId=${article.articleId}"> 
-                      <button class="btn btn-small btn-n-border btn-skyblue">Update</button>
-                    </a>
-                      <button class="btn btn-small btn-n-border btn-red" value="${article.articleId}" id="deleteArticle">
-                        Delete
-                      </button>
-                  </div>
                 </div>
                 <div class="article-body">
                   <p> 
@@ -27,6 +32,7 @@ function viewArticles(){
                   </p>   
                 </div>
                 <img src="${article.image}" class="img-big">   
+
               </div>`;
               let doc = (parser.parseFromString(articleDiv, 'text/html')).querySelector('.article');
             document.querySelector("#content").appendChild(doc);
@@ -41,20 +47,27 @@ function viewArticles(){
                 errorDiv.style.display = 'block';
                document.querySelector('#content').appendChild(errorDiv);
       }
+    })
 }        
 
 function truncateString(str) {
   return str.length > 200 ? str.slice(0, 200) + ".........." : str;
 }
+
+
     function viewBlog() {
-      
+
+      fetch('https://rukundo-kevin-blog.herokuapp.com/article')
+      .then(response => response.json())
+      .then(data => {
+
       let parser = new DOMParser();
-      let articles = JSON.parse(localStorage.getItem('articles'));
+      let articles = data.splice(0,3);
   
       if (articles && articles.length > 0) {
         articles.forEach(article =>{
               let articleDiv = `
-              <a href="blog-article.html"> 
+              <a href="blog-article.html?id=${article._id}"> 
               <div class="social skills">
                 <h3 style="text-align: center;">${article.heading}</h3>
                 <h5>${article.date}</h5>
@@ -65,7 +78,6 @@ function truncateString(str) {
                 
             let elementBefore = document.querySelector("div#blog.container").childNodes[3];
             elementBefore.parentNode.insertBefore(doc,elementBefore)
-
         })
 
       }else{
@@ -78,6 +90,9 @@ function truncateString(str) {
                 elementBefore.parentNode.insertBefore(errorDiv,elementBefore)
             errorDiv.style.display = 'block';
       }
+    });
+
     }
 
 export {viewArticles,viewBlog};
+

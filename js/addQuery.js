@@ -1,22 +1,32 @@
 import { generateId } from './generateId.js';
 
 function addQuery(name,email,subject,message){
-    let temp = JSON.parse(localStorage.getItem('queries'));
-    let   queries = temp ? temp : [];
-
+  
    const newQuery = {
-      articleId:`${generateId()}`,
-      name :name,
+      username :name,
       email : email,
-      date: new Date().toLocaleDateString(),
       message:message,
       subject:subject
        }
 
-   queries.push(newQuery);
-  localStorage.setItem( "queries", JSON.stringify(queries));
-  alert("Your Feedback Submitted Succefully");
-  window.location= 'index.html';
+       let  bearer = `Bearer ${localStorage.getItem("token")}`;
+
+       fetch('https://rukundo-kevin-blog.herokuapp.com/query', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+          },
+          body: JSON.stringify(newQuery)
+          }).then(res => {
+           if(res.ok){
+            alert("Your Feedback Submitted Succefully");
+            window.location= 'index.html';
+           }
+          }).catch((err)=>{
+             alert("Problem connecting to the server")
+          })
 }
 
 export { addQuery }; 
