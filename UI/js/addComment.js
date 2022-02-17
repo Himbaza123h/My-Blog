@@ -21,32 +21,27 @@ function addComment(id,userId,commentValue){
 }
 
 function getUsername(userId){
-    let users = JSON.parse(localStorage.getItem('users'));
-    let username ;
-     if (users && users.length > 0) {
-       users.forEach(user =>{
-           if (user.userId  == userId) {
-             username=   user.username;
-           }
-       })
-    }     
+  fetch(`https://rukundo-kevin-blog.herokuapp.com/user/${id}`)
+  .then(response => response.json())
+  .then(data => {   
     return username;
+  })
 }
 
 function viewComments(){
   let id = [...document.location.search].splice(4).join("");
 
-  fetch(`https://rukundo-kevin-blog.herokuapp.com/comment/${id}`)
+  fetch(`https://rukundo-kevin-blog.herokuapp.com/comment/article/${id}`)
   .then(response => response.json())
   .then(data => {
     let parser = new DOMParser();
     let comments = data;
-     if (comments && comments.length > 0) {
+    console.log(data)
        comments.forEach(comment =>{
            if (comment.articleId == id) {
             let commentDiv = `
             <span class="username username-comment"> ${getUsername(comment.userId)} </span> <br>
-               ${comment.commentContent}
+               ${comment.comment}
             `;
               let d = document.createElement('div');
               d.classList.add("article-comment")
@@ -55,9 +50,7 @@ function viewComments(){
             document.querySelector(".article-comments").insertBefore(d,document.querySelector(".article-comments").lastChild); 
            }
        })
-     }else{
-     //  console.log(data)
-     }
+     
     })
 } 
 
