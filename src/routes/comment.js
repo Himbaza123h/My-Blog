@@ -86,11 +86,11 @@ router.get("/user/:id", async (req,res) =>{
             console.log(user)
             res.send(user.email)   
         }else{
-            res.status(404).send("User not found")
+            res.status(206).send("User not found")
         }
     } catch(error)  {
        // console.error(error);
-        res.sendStatus(404).send("User not found");
+        res.sendStatus(206).send("User not found");
     }
 })
 
