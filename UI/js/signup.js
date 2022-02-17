@@ -5,51 +5,53 @@ function displayError(message){
 }
 
 function signup(username,password){
-     let temp = JSON.parse(localStorage.getItem('users'));
-      let   users = temp ? temp : [];
-
      const newUser = {
-        userId: `${username.replace(/\s+/g, '')}-${generateId()}`,
-        username :username,
+        email :username,
         password : password,
-        loggedIn: false,
-        type:'user'
-     }
-     
-     const admin = {
-        userId: `rukundokevin-${generateId()}`,
-        username :'Rukundo Kevin',
-        password : 'Kenneth11',
-        loggedIn: false,
-        type:'admin'
      }
 
-     users.push(newUser);
-    //  users.push(admin)
-    localStorage.setItem( "users", JSON.stringify(users));
-    console.log(users)
-    alert("Signed Up Successful");
-    window.location= 'sign-in.html';
+     fetch('https://rukundo-kevin-blog.herokuapp.com/signup', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+      }).then(res => {
+          if(res.ok){
+            alert("Signed Up Successful");
+            window.location= 'sign-in.html';
+          }
+      }).catch((err)=>{
+          alert("problem connecting to the server")
+      })
 }
 
 function signin(username,password){
-    let c = 0;
-    let users = JSON.parse(localStorage.getItem('users'));
-     if (users && users.length > 0) {
-       users.forEach(user =>{
-           if (user.username == username && user.password == password) {
-               c++;
-               alert('Logged in successfully');
-               user.loggedIn = true;
-               localStorage.setItem( "users", JSON.stringify(users));
-
-              user.type == 'user'? window.location = 'index.html' : window.location = 'owner/index.html'
-           }
-       })
-      c == 0? displayError('Invalid credentials'): '';
-     }else{
-        console.log(c == 0)
-        displayError('Invalid credentials')
+    const user = {
+        email :username,
+        password : password,
      }
+
+     fetch('https://rukundo-kevin-blog.herokuapp.com/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      }).then(res => {
+          if(!res.ok){
+           return  displayError('Invalid credentials')
+          }
+           return res.json();
+      }).then(user=>{
+            localStorage.setItem("token",user.token)
+            alert("Logged In Successfully");
+            user.type == 'admin' ? (window.location = 'owner/index.html') : (window.location = 'index.html' );
+      })
+    .catch((err)=>{
+        displayError('Invalid credentials')
+    })
 }
 export { signup,signin }; 

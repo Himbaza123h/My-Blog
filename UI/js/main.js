@@ -7,23 +7,15 @@ import {addLike,addDislike,getLikes,getDislike} from './addLike.js'
 import { addComment,viewComments } from './addComment.js';
 
 function  isLoggedIn() {
-     let c = 0;
      let signIn = document.querySelector("#signIn");
-
-     let users = JSON.parse(localStorage.getItem('users'));
-      if (users && users.length > 0) {
-        users.forEach(user =>{
-            if (user.loggedIn ) {
-                c++;
-
-                signIn.href = 'sign-out.html';
-                signIn.childNodes[1].childNodes[1].innerHTML = 'Sign out';
-            }
-        })
-        return  c == 0? false :true;
-      }else{
-       return false;
-      }
+       if (localStorage.getItem("token")) {
+          signIn.href = 'sign-out.html';
+          signIn.childNodes[1].childNodes[1].innerHTML = 'Sign out';    
+          return true;       
+       }
+    else{
+     return false;
+    }  
 }
 
 function  getUserId() {
