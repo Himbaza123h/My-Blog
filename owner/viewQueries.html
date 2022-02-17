@@ -15,28 +15,23 @@
  <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
  <!-- <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">  -->
+ <style>
+  li{
+    float: right;
+  }
+</style>
 </head>
 <body id="viewQueriesFile">
   <!-- The top navigation bar -->
   <nav class="nav ">
     <ul class="nav-blog-owner">
+      <span class="sidebar-toggle"> <i class="fas fa-arrow-right fa-2x" id="sidebarToggle"></i>  </span>
       <span class="name"> <span class="circle">R</span> UKUND</span>
       <div class="pulse">
       </div>
            <span class="nav-ul">
-         <a href="../index.html#who" class="nav-item">
-            <li class="first_list"> <span class="list"> About </span> </li>
-          </a>
-         <a href="../index.html#who" class="nav-item"> 
-           <li> <span class="list"> Experience </span> </li>
-          </a>
-         <a href="../index.html#where" class="nav-item">
-            <li> <span class="list"> Social </span> </li>
-          </a>
-         <a href="../index.html#how" class="nav-item">
-           <li id="howLi"> <span class="list"> Contact </span></li>
-          </a>
-          <a href="../index.html" class="nav-item">
+
+          <a href="../index.html" class="nav-item" id="signIn">
             <li id="howLi"> <span class="list"> Sign Out </span></li>
            </a>
          <li id="hamburger" class="hamburger"> <i class="fa fa-bars fa-2x"></i>  </li>
@@ -64,7 +59,7 @@
         <div class="header">
            View Queries 
         </div>  
-        <div class="container article-form-container" style="overflow-x: auto;">
+        <div class="container article-form-container" style="overflow-x: auto; min-height: auto;">
             <table>
               <thead>
                 <th>Names</th>
@@ -83,7 +78,26 @@
       </div>
   </div>
 </body>
+<script>
+  var sidebarToggle = document.querySelector("#sidebarToggle"),
+      sidebar = document.querySelector(".sidebar");
+      document.addEventListener('DOMContentLoaded',function(){
+        sidebarToggle.parentElement.addEventListener("click",function(e){
+            sidebar.classList.toggle('sidebar-active');
+            let c = 0;
+            if (c == 1) {
+              document.querySelector('.sidebar-toggle').innerHTML = `<i class="fa fa-arrow-right fa-2x"></i>`;
 
+            }
+            if(sidebarToggle.classList.contains('fa-arrow-right')){
+              document.querySelector('.sidebar-toggle').innerHTML = `<i class="fa fa-arrow-up fa-2x"></i>`;
+               c++;
+            }
+        })
+      })
+
+
+</script>
 <script type="text/javascript" src="../js/script.js"></script>
 <script type="module" src="../js/main.js"></script>
 </html>

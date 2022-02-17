@@ -1,5 +1,8 @@
 import { addArticle } from './addArticle.js';
 import {addQuery } from './addQuery.js'
+import {signin, signup} from './signup.js'
+import {getUserId} from './main.js';
+
 let img ;
   document.addEventListener("DOMContentLoaded",function (e) {
        if (document.body.id == 'addArticleFile' ) {
@@ -48,6 +51,15 @@ function displayError(message){
     document.querySelector('div.error').style.display = 'block';
 }
 
+function  isPasswordStrong(pw) {
+    let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{5,})')
+    
+        if(strongPassword.test(pw)) {
+               return 'strong';
+        } else{
+           return 'weak';
+    }
+}
 function validateInput(form){
       let formEle = filterForm(form);
      
@@ -57,20 +69,49 @@ function validateInput(form){
                 email = document.querySelector('#email').value,
                 subject = document.querySelector('#subject').value,
                 message = document.querySelector('#message').value;
-                console.log(message)
-                  addQuery(name,email,subject,message);
+                if (name.length > 5 && subject.length > 5 && message.length > 10) {
+                    addQuery(name,email,subject,message);
+
+                }else{
+                    displayError('Field contents below minimum');
+                }
             }else{
                 displayError('Please fill all fields before submitting.');
             }
-     }else if(form.id == 'login-form'){
+     }
+     //if the current form is login form
+     else if(form.id == 'login-form'){
+        let username = document.querySelector("#username").value,
+        password = document.querySelector("#password").value;
             if( !isEmpty(formEle)){
-               console.log ( document.querySelector('input'))
-                window.location = "owner/index.html"
+                signin(username,password);
             }else{
                 displayError('Please fill all fields before submitting.');
             }   
          }
 
+         else if(form.id == 'signup-form'){
+         let username = document.querySelector("#username").value,
+             password = document.querySelector("#password").value,
+             passwordConfirm = document.querySelector("#passwordCheck").value;
+            if( !isEmpty(formEle)){
+                if (username.length < 5) {
+                    displayError("Username too short");
+
+                }else{
+                if (isPasswordStrong(password) == 'strong') {
+                   password == passwordConfirm?signup(username,password):displayError("Password don't match")
+                     //
+                }else{
+                    displayError("Your Password is weak. <br> Tip: Include a capital letter and a number");
+                }
+            }
+           }else{
+                displayError('Please fill all fields before submitting.');
+            }   
+         }
+
+    //if the current form is add article form
     else if(form.id == 'add-article-form'){
         let articleHeading = document.querySelector('#article-heading'),
         articleContent = document.querySelector('#article-content');
@@ -84,7 +125,23 @@ function validateInput(form){
                }
                if(articleContent.value.length > 50 && articleHeading.value.length > 21){
                    document.querySelector('div.error').style.display = 'none'; 
-                   addArticle(articleHeading.value,articleContent.value,img);
+                   addArticle(articleHeading.value,articleContent.value,img,getUserId());
+               }
+        }else{
+            displayError('Please fill all fields before submitting.');
+        }   
+    }
+
+    else if(form.id == 'update-article-form'){
+        let articleHeading = document.querySelector('#article-heading'),
+        articleContent = document.querySelector('#article-content');
+        
+        if(!isEmpty(formEle)){
+               if (articleHeading.value.length < 21) {
+                 displayError('The article heading should not be less than 20 letters.');
+               }
+               if (articleContent.value.length < 50) {
+                 displayError('The article contents should not be less than 50 letters.');     
                }
         }else{
             displayError('Please fill all fields before submitting.');

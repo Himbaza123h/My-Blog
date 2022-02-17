@@ -16,7 +16,7 @@
 
  <!-- <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">  -->
 </head>
-<body>
+<body id="blogArticleFile">
   <!-- The top navigation bar -->
   <nav class="nav ">
     <ul class="nav-blog-owner">
@@ -36,7 +36,7 @@
           <a href="index.html#how" class="nav-item">
             <li id="howLi"> <span class="list"> Contact </span></li>
           </a>
-          <a href="sign-in.html" class="nav-item">
+          <a href="sign-in.html" class="nav-item" id="signIn">
             <li id="howLi"> <span class="list"> Sign In </span></li>
            </a>
          <li id="hamburger" class="hamburger"> <i class="fa fa-bars fa-2x"></i>  </li>
@@ -60,10 +60,10 @@
                   </p>   
                 </div>
               <img src="img/person.svg" alt="Rukundo Kevin" class="img-big">  <br>
-              <div class="article-info article-comments">
-                    <span id="like"> <i class="fas fa-thumbs-up"> Like </i> 10 </span> 
+              <div class="article-comments">
+                    <span id="like"> <i class="fas fa-thumbs-up"> Like </i>   </span> 
                     <span id="dislike"> <i class="fas fa-thumbs-down"> Dislike </i> 3 </span> 
-                    <span id="comment"><i class="fas fa-comment"> Comments </i></span> <br>
+                    <span ><i class="fas fa-comment"> Comments </i></span> <br>
 
                    <div class="article-comment">
                     <span class="username username-comment"> Barry Alen </span> <br>
@@ -82,8 +82,10 @@
                            Error Message
                       </div>
                       <div class="form-item">
-                        <input type="text" name="comment">
-                        <button class="btn btn-small btn-n-border btn-comment" style="display: inline-block;"><i class="fas fa-arrow-right"> Comment </i></button>
+                        <input type="text" name="comment" id="commentValue">
+                        <button class="btn btn-small btn-n-border btn-comment" style="display: inline-block;">
+                          <i class="fas fa-arrow-right"> Comment </i>
+                        </button>
                       </div>
                     </div>
               </div> 
@@ -93,5 +95,5 @@
 </body>
 
 <script type="text/javascript" src="js/script.js"></script>
-
+<script type="module" src="./js/main.js"></script>
 </html>
