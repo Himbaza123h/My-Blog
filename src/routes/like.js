@@ -212,16 +212,16 @@ router.post("/",verifyToken,validateMiddleWare(validateLike) , async (req,res) =
 
 router.delete("/:id", verifyToken,validateMiddleWare(validateLike), async (req, res) => {
 	try {
-        //ch if a user has previously liked the article
+        //check if a user has previously liked the article
         let likeExists = Like.findOne({articleId:req.body.articleId, userId: req.user["id"]});
          if (likeExists) {
             await Like.deleteOne({ articleId: req.params.id , userId:req.user["id"]})
          }
-         let dislikeExists = Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
+         let dislikeExists = await Dislike.findOne({articleId:req.body.articleId, userId: req.user["id"]});
 
          //check if user has disliked article and remove dislike
          if (dislikeExists) {
-          await Dislike.deleteOne({ articleId: req.params.id , userId:req.user["id"]})
+             res.status(405).send("Dislike already exists");
           }else{
             const newDislike = new Dislike({
                 articleId : req.body.articleId,
@@ -230,7 +230,7 @@ router.delete("/:id", verifyToken,validateMiddleWare(validateLike), async (req, 
         
                 await newDislike.save();
 
-            res.status(201).send({Message:"you have dislike this article"}) 
+            res.status(201).send({Message:"you have disliked this article"}) 
             }
 	} catch {
 		res.status(500).send({ error: "Problem disliking" })
