@@ -83,7 +83,11 @@ router.get("/",  async(req,res)=>{
 router.get("/:id", async (req,res) =>{
     try {
         const article = await Article.findOne({ _id: req.params.id})
-        res.status(200).send(article)   
+        if (article) {
+            res.status(200).send(article)   
+        }else{
+            res.status(404).send({error: "Article doesn't exist !"})
+        }
     } catch (err) {
         res.status(404).send({error: "Article doesn't exist !"})
         // console.log(err)
@@ -202,7 +206,7 @@ router.put("/:id",verifyToken, validateMiddleWare(validateArticle) ,async (req, 
         }
 	} catch(err) {
 		res.status(404).send({ error: "We couldn't find that article " })
-        console.log(err);
+       // console.log(err);
 	}
 })
 
